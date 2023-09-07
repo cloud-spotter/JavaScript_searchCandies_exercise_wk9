@@ -19,6 +19,28 @@ const candies = [
 describe ('searchCandies', () => {
     it('returns an array of objects that start with the given substring',
     () => {
-        expect(searchCandies(candies, 'Ma')).toEqual(['Mars', 'Maltesers']);
+        expect(searchCandies(candies, 'Ma', 10)).toEqual(['Mars', 'Maltesers']);
     });
-})
+
+    it(`returns an array of objects that start with the given substring,
+    but whose price is less than the maximum price`,
+    () => {
+        expect(searchCandies(candies, 'Ma', 2)).toEqual(['Mars']);
+    });
+
+    it('filters the candies array by "S" and 10', () => {
+        expect(searchCandies(candies, 'S', 10)).toEqual(['Skitties', 'Skittles', 'Starburst'])
+    });
+
+    it('filters the candies array by "S" and 4', () => {
+        expect(searchCandies(candies, 'S', 4)).toEqual(['Skitties', 'Skittles'])
+    });
+
+    it('filters the candies array whether the prefix is upper or lowercase', () => {
+        expect(searchCandies(candies, 's', 4)).toEqual(['Skitties', 'Skittles'])
+    });
+});
+
+/* How strong are these 'it' string descriptions?
+Investigate: ask a coach/peer to glance over this code for improvements,
+with the 'it' statements particularly in mind. */

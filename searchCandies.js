@@ -14,17 +14,19 @@ const candies = [
     { name: 'Fraise Tagada', price: 5.99 }
 ];
 
-const searchCandies = (arrayToSearch, prefix) => {
-    const filteredByPrefix = arrayToSearch.filter((candy) => candy.name.startsWith(prefix));
-    let result = []
-    filteredByPrefix.forEach((element) => {
-        //result = result.concat(element.name); 
-        //.concat returns a new array (.push more appropriate here)
-        result.push(element.name)
+const searchCandies = (arrayToSearch, prefix, maxPrice) => {
+    // Convert prefix to lowercase for comparison
+    const lowerCasePrefix = prefix.toLowerCase();
+
+    const filtered = arrayToSearch.filter((candy) => {
+        // Convert candy names to lowercase for comparison
+        const lowerCaseCandy = candy.name.toLowerCase(); 
+        return lowerCaseCandy.startsWith(lowerCasePrefix) && candy.price < maxPrice;
     });
+    
+    // Return new array containing only candy names meeting the criteria
+    const result = filtered.map(candy => candy.name);
     return result;
 };
-
-console.log(searchCandies(candies, 'Ma'))
 
 module.exports = searchCandies;
